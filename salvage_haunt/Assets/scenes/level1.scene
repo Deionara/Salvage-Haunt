@@ -2,6 +2,19 @@
   "__guid": "325a4042-0696-43dd-a79d-dcc314299ba3",
   "GameObjects": [
     {
+      "__guid": "51c77191-4242-4953-801f-d625d7381b88",
+      "Flags": 0,
+      "Name": "Game",
+      "Position": "-577.498,-5.713221,27.7663",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Game",
+          "__guid": "458313e9-b3ad-4e98-b20f-057ead7c2bea"
+        }
+      ]
+    },
+    {
       "__guid": "5f3294ef-0818-4633-9fcb-ed5711aa5f14",
       "Flags": 0,
       "Name": "Scene Information",
@@ -193,13 +206,22 @@
             "go": "887f9778-5f41-49d6-8327-63d117bde903"
           },
           "EyesPosition": "0,0,61.68002",
-          "JumpStrong": 355,
+          "JumpStrong": 300,
           "MoveSpeed": 150,
           "viewState": "First"
         },
         {
-          "__type": "Inventory",
-          "__guid": "9b635f8f-4b1b-4836-8d0f-05ab89d20d5b",
+          "__type": "PlayerPickup",
+          "__guid": "f7e71c11-f70d-49d5-a17b-2758c7878adb",
+          "Camera": {
+            "_type": "gameobject",
+            "go": "887f9778-5f41-49d6-8327-63d117bde903"
+          },
+          "DistancePickup": 100
+        },
+        {
+          "__type": "PlayerInventory",
+          "__guid": "5258b388-e68a-4055-a3c4-ce3d161edeff",
           "inventory": [],
           "TargetPivotPickableDrop": {
             "_type": "gameobject",
@@ -211,15 +233,6 @@
           },
           "_currentSlot": 0,
           "maxSlots": 3
-        },
-        {
-          "__type": "PlayerPickup",
-          "__guid": "f7e71c11-f70d-49d5-a17b-2758c7878adb",
-          "Camera": {
-            "_type": "gameobject",
-            "go": "887f9778-5f41-49d6-8327-63d117bde903"
-          },
-          "DistancePickup": 100
         },
         {
           "__type": "Sandbox.CharacterController",
@@ -337,41 +350,51 @@
           "Name": "TargetPivotPickableDrop",
           "Position": "5.107853,0,37.407",
           "Enabled": true
-        }
-      ]
-    },
-    {
-      "__guid": "2dd5a916-1039-4efb-b946-7389f08217d7",
-      "Flags": 0,
-      "Name": "Screen",
-      "Position": "-82.98692,90.30177,17.39959",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Sandbox.ScreenPanel",
-          "__guid": "37a0743c-92ea-4f34-888b-fefc4d11bae2",
-          "AutoScreenScale": true,
-          "Opacity": 1,
-          "Scale": 1,
-          "ScaleStrategy": "ConsistentHeight",
-          "ZIndex": 100
         },
         {
-          "__type": "Sandbox.PlayerHud",
-          "__guid": "8b333438-609a-434f-89f7-04aa38fbbdc9",
-          "player": {
-            "_type": "component",
-            "component_id": "7cf2e28f-9c6d-49b5-90e1-9bae1d48894d",
-            "go": "52f62b65-8485-4bd8-a450-f4c2f72a6c9e",
-            "component_type": "Player"
-          }
+          "__guid": "2dd5a916-1039-4efb-b946-7389f08217d7",
+          "Flags": 0,
+          "Name": "Screen",
+          "Position": "-34.00047,109.272,11.25248",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.ScreenPanel",
+              "__guid": "37a0743c-92ea-4f34-888b-fefc4d11bae2",
+              "AutoScreenScale": true,
+              "Opacity": 1,
+              "Scale": 1,
+              "ScaleStrategy": "ConsistentHeight",
+              "ZIndex": 100
+            },
+            {
+              "__type": "Sandbox.PlayerHud",
+              "__guid": "8b333438-609a-434f-89f7-04aa38fbbdc9",
+              "player": {
+                "_type": "component",
+                "component_id": "7cf2e28f-9c6d-49b5-90e1-9bae1d48894d",
+                "go": "52f62b65-8485-4bd8-a450-f4c2f72a6c9e",
+                "component_type": "Player"
+              }
+            },
+            {
+              "__type": "Hotbar",
+              "__guid": "0e856386-a433-4f78-a04a-40d276f63143",
+              "player": {
+                "_type": "component",
+                "component_id": "7cf2e28f-9c6d-49b5-90e1-9bae1d48894d",
+                "go": "52f62b65-8485-4bd8-a450-f4c2f72a6c9e",
+                "component_type": "Player"
+              }
+            }
+          ]
         }
       ]
     },
     {
       "__guid": "fed48ac2-f8b7-4b75-a375-d3ae0d575a44",
       "Flags": 0,
-      "Name": "ground",
+      "Name": "SellZone",
       "Position": "-352,32,0",
       "Enabled": true,
       "Components": [
@@ -426,12 +449,38 @@
               0
             ],
             "Materials": [
-              "materials/dev/reflectivity_30.vmat"
+              "materials/dev/reflectivity_30.vmat",
+              "models/crates_and_barrels_2.vmat"
             ]
           },
           "SmoothingAngle": 40,
           "Static": true,
           "SurfaceVelocity": "0,0,0"
+        },
+        {
+          "__type": "Sandbox.BoxCollider",
+          "__guid": "e4030638-f51c-4c23-b7af-4c244a1ff9be",
+          "Center": "0,0,21.35999",
+          "IsTrigger": true,
+          "Scale": "186,186,32",
+          "Static": false,
+          "SurfaceVelocity": "0,0,0"
+        },
+        {
+          "__type": "SellZone",
+          "__guid": "f9f89bf9-299f-4c76-8e03-98a7c497369e",
+          "CurrentQuotaText": {
+            "_type": "component",
+            "component_id": "af1b6f4e-c102-41f2-9fa6-fd78d10e13bb",
+            "go": "454d0d78-3be7-413a-b241-8ef9ec2928fc",
+            "component_type": "TextRenderer"
+          },
+          "ItemsListText": {
+            "_type": "component",
+            "component_id": "0b9e0cbe-2495-4238-b9be-49dfff55ea8e",
+            "go": "cf27ad00-434a-46bc-a469-a804d5b535c3",
+            "component_type": "TextRenderer"
+          }
         }
       ],
       "Children": [
@@ -489,6 +538,441 @@
                   "Offset": "4,4"
                 }
               }
+            }
+          ]
+        },
+        {
+          "__guid": "cf27ad00-434a-46bc-a469-a804d5b535c3",
+          "Flags": 0,
+          "Name": "items list",
+          "Position": "-45.5947,-62.6927,48.71834",
+          "Rotation": "0,0,1,0.0000001947072",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.TextRenderer",
+              "__guid": "0b9e0cbe-2495-4238-b9be-49dfff55ea8e",
+              "__version": 1,
+              "BlendMode": "Lighten",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "Scale": 0.1,
+              "TextAlignment": "Left",
+              "TextScope": {
+                "Text": "Heavy Cube - 50$\nHeavy Cube - 50$\nHeavy Cube - 50$\n",
+                "TextColor": "0.45103,0.47149,0.5297,1",
+                "FontName": "Poppins",
+                "FontSize": 33.23,
+                "FontWeight": 800,
+                "FontItalic": false,
+                "LineHeight": 0.89,
+                "LetterSpacing": 2.559999,
+                "WordSpacing": 0.4800055,
+                "Outline": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,0,1,1"
+                },
+                "Shadow": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,0,0,1",
+                  "Offset": "4,4"
+                },
+                "OutlineUnder": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,1,0,1"
+                },
+                "ShadowUnder": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,0,0,1",
+                  "Offset": "4,4"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "454d0d78-3be7-413a-b241-8ef9ec2928fc",
+          "Flags": 0,
+          "Name": "needed quota",
+          "Position": "-45.5947,-13.64011,36.23154",
+          "Rotation": "0,0,1,0.0000001947072",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.TextRenderer",
+              "__guid": "af1b6f4e-c102-41f2-9fa6-fd78d10e13bb",
+              "__version": 1,
+              "BlendMode": "Normal",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "Scale": 0.1,
+              "TextAlignment": "Right",
+              "TextScope": {
+                "Text": "1000/1000$",
+                "TextColor": "0.45103,0.47149,0.5297,1",
+                "FontName": "Poppins",
+                "FontSize": 33.23,
+                "FontWeight": 800,
+                "FontItalic": false,
+                "LineHeight": 0.89,
+                "LetterSpacing": 2.559999,
+                "WordSpacing": 0.4800055,
+                "Outline": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,0,1,1"
+                },
+                "Shadow": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,0,0,1",
+                  "Offset": "4,4"
+                },
+                "OutlineUnder": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,1,0,1"
+                },
+                "ShadowUnder": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,0,0,1",
+                  "Offset": "4,4"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "8806885d-7e7e-46d9-a8f5-31b72509b483",
+          "Flags": 0,
+          "Name": "money",
+          "Position": "-45.5947,-61.63245,36.23154",
+          "Rotation": "0,0,1,0.0000001947072",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "Sandbox.TextRenderer",
+              "__guid": "78cd3dc4-1e36-45a7-8b97-c61d9d3b181a",
+              "__version": 1,
+              "BlendMode": "Normal",
+              "RenderOptions": {
+                "GameLayer": true,
+                "OverlayLayer": false,
+                "BloomLayer": false,
+                "AfterUILayer": false
+              },
+              "Scale": 0.1,
+              "TextAlignment": "Left",
+              "TextScope": {
+                "Text": "1000$",
+                "TextColor": "0.45103,0.47149,0.5297,1",
+                "FontName": "Poppins",
+                "FontSize": 33.23,
+                "FontWeight": 800,
+                "FontItalic": false,
+                "LineHeight": 0.89,
+                "LetterSpacing": 2.559999,
+                "WordSpacing": 0.4800055,
+                "Outline": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,0,1,1"
+                },
+                "Shadow": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,0,0,1",
+                  "Offset": "4,4"
+                },
+                "OutlineUnder": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,1,0,1"
+                },
+                "ShadowUnder": {
+                  "Enabled": false,
+                  "Size": 4,
+                  "Color": "0,0,0,1",
+                  "Offset": "4,4"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "__guid": "e7237c75-7767-447b-b8ff-908850c2e389",
+          "Flags": 0,
+          "Name": "Maschine",
+          "Enabled": true,
+          "Children": [
+            {
+              "__guid": "1f66c76e-8e4a-4e7d-b1e8-12fae0c94f93",
+              "Flags": 0,
+              "Name": "Box",
+              "Position": "-55.3634,-48.26501,49.38085",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.MeshComponent",
+                  "__guid": "4ad30e4b-2ca6-4986-81bc-d8eef4cda019",
+                  "Collision": "Mesh",
+                  "Color": "1,1,1,1",
+                  "HideInGame": false,
+                  "IsTrigger": false,
+                  "Mesh": {
+                    "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f\u002BlaMRGsohUVbFn1\u002Bt04ANs\u002BZ0VsM69AwfgBFyAKZ9MPXdgk3qLnsI\u002BUm/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt\u002BivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                    "Positions": [
+                      "-8.636597,-15.6522,16.46014",
+                      "8.636597,-15.6522,16.46014",
+                      "8.636536,36.0371,16.46014",
+                      "-8.636658,36.0371,16.46014",
+                      "-8.636658,36.0371,-16.46014",
+                      "8.636536,36.0371,-16.46014",
+                      "8.636597,-15.6522,-16.46014",
+                      "-8.636597,-15.6522,-16.46014"
+                    ],
+                    "TextureCoord": [
+                      "-2.932527,1.122283",
+                      "-3.067473,-0.1285948",
+                      "-2.932527,0.7184601",
+                      "-0.1222828,-0.1285948",
+                      "-3.067474,0.7184601",
+                      "3.932527,-0.1285948",
+                      "-3.067473,1.122283",
+                      "0.7184601,-0.1285948",
+                      "-2.932527,0.7184601",
+                      "4.067474,0.1285948",
+                      "-2.932527,1.122283",
+                      "0.2815398,0.1285948",
+                      "-3.067473,1.122283",
+                      "-2.932527,0.1285948",
+                      "-3.067474,0.7184601",
+                      "1.122283,0.1285948",
+                      "1.122283,-0.1285948",
+                      "-3.067473,0.1285948",
+                      "0.7184601,0.1285948",
+                      "4.067474,-0.1285948",
+                      "-0.1222828,0.1285948",
+                      "-2.932527,-0.1285948",
+                      "0.2815398,-0.1285948",
+                      "3.932527,0.1285948"
+                    ],
+                    "TextureUAxis": [
+                      "1,-0.000001180825,0",
+                      "1,-0.000001180808,-0",
+                      "0.000001180808,-1,0",
+                      "-0.000001180808,1,0",
+                      "-1,0,0",
+                      "1,-0,0"
+                    ],
+                    "TextureVAxis": [
+                      "0,-1,0",
+                      "0,-1,0",
+                      "0,0,-1",
+                      "0,0,-1",
+                      "0,0,-1",
+                      "-0,0,-1"
+                    ],
+                    "TextureScale": [
+                      "0.2500018,0.2499999",
+                      "0.25,0.2499999",
+                      "0.2499999,0.2500001",
+                      "0.25,0.2500001",
+                      "0.25,0.2500001",
+                      "0.2500018,0.2500001"
+                    ],
+                    "TextureOffset": [
+                      "93.44202,446.94",
+                      "93.45374,446.94",
+                      "446.9419,197.5233",
+                      "65.05814,197.5233",
+                      "418.5464,197.5233",
+                      "93.44202,197.5233"
+                    ],
+                    "MaterialIndex": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "EdgeFlags": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "Materials": [
+                      "materials/dev/reflectivity_30.vmat"
+                    ]
+                  },
+                  "SmoothingAngle": 40,
+                  "Static": true,
+                  "SurfaceVelocity": "0,0,0"
+                }
+              ]
+            },
+            {
+              "__guid": "24a6a9f1-14d9-425b-a803-ddddf1722a08",
+              "Flags": 0,
+              "Name": "Box",
+              "Position": "-46.56262,-48,16.46035",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "Sandbox.MeshComponent",
+                  "__guid": "6bb37091-187d-4198-8df5-01f59b5e89b4",
+                  "Collision": "Mesh",
+                  "Color": "1,1,1,1",
+                  "HideInGame": false,
+                  "IsTrigger": false,
+                  "Mesh": {
+                    "Topology": "H4sIAAAAAAAACl2QCQ7CMAwEp4Qj3NBy/f\u002BlaMRGsohUVbFn1\u002Bt04ANs\u002BZ0VsM69AwfgBFyAKZ9MPXdgk3qLnsI\u002BUm/h/me9i2ZXfFvYOazafTJN0XRgKZmPyWtfXvYVL73PZRd52WdYPa7xtC8veys7u6t17/7t6Tn0ZtFjvIXZR895zjKjPWf4NiOrGt\u002BivpXZ3XnozaOndVn9vvVkkTjEAQAA",
+                    "Positions": [
+                      "-17.43738,-16,16.46014",
+                      "17.43738,-16,16.46014",
+                      "17.43732,36.3849,16.46014",
+                      "-17.43744,36.3849,16.46014",
+                      "-17.43744,36.3849,-16.46014",
+                      "17.43732,36.3849,-16.46014",
+                      "17.43738,-16,-16.46014",
+                      "-17.43738,-16,-16.46014"
+                    ],
+                    "TextureCoord": [
+                      "-2.86377,1.125",
+                      "-3.136229,-0.1285948",
+                      "-2.86377,0.715743",
+                      "-0.125,-0.1285948",
+                      "-3.13623,0.715743",
+                      "3.86377,-0.1285948",
+                      "-3.136229,1.125",
+                      "0.715743,-0.1285948",
+                      "-2.86377,0.715743",
+                      "4.13623,0.1285948",
+                      "-2.86377,1.125",
+                      "0.284257,0.1285948",
+                      "-3.136229,1.125",
+                      "-2.86377,0.1285948",
+                      "-3.13623,0.715743",
+                      "1.125,0.1285948",
+                      "1.125,-0.1285948",
+                      "-3.136229,0.1285948",
+                      "0.715743,0.1285948",
+                      "4.13623,-0.1285948",
+                      "-0.125,0.1285948",
+                      "-2.86377,-0.1285948",
+                      "0.284257,-0.1285948",
+                      "3.86377,0.1285948"
+                    ],
+                    "TextureUAxis": [
+                      "1,-0.000001165129,0",
+                      "1,-0.000001165121,-0",
+                      "0.000001165129,-1,0",
+                      "-0.000001165129,1,0",
+                      "-1,0,0",
+                      "1,-0,0"
+                    ],
+                    "TextureVAxis": [
+                      "0,-1,0",
+                      "0,-1,0",
+                      "0,0,-1",
+                      "0,0,-1",
+                      "0,0,-1",
+                      "-0,0,-1"
+                    ],
+                    "TextureScale": [
+                      "0.25,0.25",
+                      "0.2499991,0.25",
+                      "0.25,0.2500001",
+                      "0.25,0.2500001",
+                      "0.2499991,0.2500001",
+                      "0.25,0.2500001"
+                    ],
+                    "TextureOffset": [
+                      "58.25061,448",
+                      "58.25635,448",
+                      "448.002,65.84138",
+                      "63.99821,65.84139",
+                      "453.7438,65.84138",
+                      "58.25073,65.84136"
+                    ],
+                    "MaterialIndex": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "EdgeFlags": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "Materials": [
+                      "materials/dev/reflectivity_30.vmat"
+                    ]
+                  },
+                  "SmoothingAngle": 40,
+                  "Static": true,
+                  "SurfaceVelocity": "0,0,0"
+                }
+              ]
             }
           ]
         }
@@ -595,25 +1079,34 @@
       "__PrefabVariables": {}
     },
     {
-      "__guid": "c21b5136-d67c-457e-a1ae-ca6d65fae779",
+      "__guid": "f2be1009-3588-443b-8083-7c0ea071abf0",
       "Flags": 0,
-      "Name": "Heavy Cube (4)",
-      "Position": "-59.96202,141.7452,8.449319",
-      "Scale": "0.5632889,0.5632889,0.5632889",
+      "Name": "Barrel",
+      "Position": "-194.7164,33.97524,21.35852",
       "Tags": "prop",
       "Enabled": true,
-      "__Prefab": "prefabs/heavy cube.prefab",
+      "__Prefab": "prefabs/barrel.prefab",
       "__PrefabVariables": {}
     },
     {
-      "__guid": "f2be1009-3588-443b-8083-7c0ea071abf0",
+      "__guid": "9cc480cf-be7a-4d19-be58-f463c711cc73",
       "Flags": 0,
-      "Name": "Heavy Cube (1)",
-      "Position": "56.62991,58.74925,8.449319",
-      "Scale": "0.5632889,0.5632889,0.5632889",
+      "Name": "Barrel (1)",
+      "Position": "-194.7164,33.97524,69.74469",
       "Tags": "prop",
       "Enabled": true,
-      "__Prefab": "prefabs/heavy cube.prefab",
+      "__Prefab": "prefabs/barrel.prefab",
+      "__PrefabVariables": {}
+    },
+    {
+      "__guid": "c3beda40-81d3-451f-891d-38bde0a7bb98",
+      "Flags": 0,
+      "Name": "Barrel (2)",
+      "Position": "-194.7164,41.09512,110.0875",
+      "Rotation": "0.258819,0,0,0.9659258",
+      "Tags": "prop",
+      "Enabled": true,
+      "__Prefab": "prefabs/barrel.prefab",
       "__PrefabVariables": {}
     }
   ],
@@ -622,7 +1115,7 @@
     "MaxFixedUpdates": 5,
     "NetworkFrequency": 60,
     "NetworkInterpolation": true,
-    "PhysicsSubSteps": 1,
+    "PhysicsSubSteps": 2,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true,

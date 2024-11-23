@@ -1,0 +1,33 @@
+﻿@using Sandbox;
+@using SalvageHaunt;
+@inherits PanelComponent
+
+<div class="hotbar">
+    @for (int i = 0; i < PlayerInventory.Instance.maxSlots; i++)
+    {
+        <div class="slot @(PlayerInventory.Instance._currentSlot == i ? "active" : "")">
+            @if (i < PlayerInventory.Instance.inventory.Count && PlayerInventory.Instance.inventory[i] != null)
+            {
+                <img src="@GetItemImage(PlayerInventory.Instance.inventory[i])" alt="Item" />
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Property] public Player player;
+
+    private string GetItemImage(GameObject item)
+    {
+        var itemComponent = item.GetComponent<Item>();
+        return itemComponent?.IconPath ?? "default_icon.png";
+    }
+
+    protected override int BuildHash()
+    {
+        return System.HashCode.Combine(
+            PlayerInventory.Instance._currentSlot,
+            PlayerInventory.Instance.inventory.Count
+        );
+    }
+}

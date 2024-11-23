@@ -24,12 +24,6 @@
         "Tint": "1,0,0.93333,1"
       },
       {
-        "__type": "SalvageHaunt.Prop",
-        "__guid": "856a2ad4-489d-400b-9292-6b61e637df7a",
-        "Kostet": 50,
-        "Name": "Heavy Cube"
-      },
-      {
         "__type": "Sandbox.BoxCollider",
         "__guid": "adf22580-7a25-4d7f-b1c3-3fb8fabf1612",
         "Center": "0,0,0",
@@ -58,6 +52,13 @@
         "OverrideMassCenter": false,
         "RigidbodyFlags": 0,
         "StartAsleep": false
+      },
+      {
+        "__type": "SalvageHaunt.Item",
+        "__guid": "d6db0160-efce-4cbc-8bdf-d50b10411c46",
+        "IconPath": "",
+        "Name": "Heavy Cube",
+        "Price": 50
       }
     ],
     "Children": [],

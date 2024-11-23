@@ -1,15 +1,16 @@
 using Sandbox;
 using System;
 
-public sealed class Inventory : Component
+public sealed class PlayerInventory : Component
 {
-	public static Inventory Instance {  get; set; }
+	public static PlayerInventory Instance {  get; set; }
 
 	[Property]
 	public List<GameObject> inventory = new List<GameObject>();
 
 	[Property]
 	public GameObject TargetPivotPickableDrop;
+	[Property]
 	private GameObject _currentSlotProp;
 
 	[Property]
@@ -30,7 +31,7 @@ public sealed class Inventory : Component
 
 	protected override void OnUpdate()
 	{
-		Debug();
+		//Debug();
 
 
 		if ( Input.Pressed( "reload" ) && _currentSlotProp != null )
@@ -51,21 +52,31 @@ public sealed class Inventory : Component
 	{
 		if ( inventory.Count > 0 )
 		{
-			foreach ( var prop in inventory )
-			{
-				if( prop != null )
-					prop.Enabled = false;
-				_currentSlotProp = null;
-			}
+
 			for ( int i = 0; i < inventory.Count; i++ )
 			{
-				if ( inventory[i] != null && inventory[_currentSlot] != null )
+				if ( inventory[i] != null && _currentSlotProp != null )
 				{
-					_currentSlotProp = inventory[currentSlot];
-					_currentSlotProp.Enabled = true;
+					inventory[i].Enabled = false;
 				}
 			}
-
+			if(_currentSlot >= 0 && currentSlot < inventory.Count)
+			{
+				_currentSlotProp = inventory[currentSlot];
+				_currentSlotProp.Enabled = true;
+			}
+			else
+			{
+				_currentSlotProp = null;
+			}
+			//for ( int i = 0; i < inventory.Count; i++ )
+			//{
+			//	if ( inventory[_currentSlot] != null && _currentSlotProp == null && _currentSlotProp != inventory[_currentSlot] )
+			//	{
+			//		_currentSlotProp = inventory[currentSlot];
+			//		_currentSlotProp.Enabled = true;
+			//	}
+			//}
 		}
 	}
 	public void Drop()
@@ -75,12 +86,10 @@ public sealed class Inventory : Component
 			if ( inventory[i] != null && _currentSlotProp== inventory[i] && _currentSlotProp != null)
 			{
 				_currentSlotProp.Parent = null;
-				_currentSlotProp.GetComponent<Collider>().IsTrigger = false;
 				_currentSlotProp.GetComponent<Rigidbody>().Gravity = true;
 				_currentSlotProp.WorldPosition = TargetPivotPickableDrop.WorldPosition;
 				_currentSlotProp.WorldRotation = TargetPivotPickableDrop.WorldRotation;
 				inventory.Remove(_currentSlotProp);
-				Log.Info( $"{_currentSlotProp.Name} ist aus weg" );
 			}
 		}
 	}
@@ -93,7 +102,6 @@ public sealed class Inventory : Component
 			gameObject.WorldPosition = WeaponParent.WorldPosition;
 			gameObject.WorldRotation = WeaponParent.WorldRotation;
 			gameObject.GetComponent<Rigidbody>().Gravity = false;
-			gameObject.GetComponent<Collider>().IsTrigger = true;
 			gameObject.Enabled = false;
 		}
 		else

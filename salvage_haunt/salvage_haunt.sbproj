@@ -1,11 +1,11 @@
 {
-  "Title": "Salvage Haunt",
+  "Title": "Salvage Haunt: prototype",
   "Type": "game",
-  "Org": "local",
+  "Org": "venedetta",
   "Ident": "salvage_haunt",
   "Schema": 1,
-  "IncludeSourceFiles": false,
-  "Resources": null,
+  "IncludeSourceFiles": true,
+  "Resources": "\n*.png\n*.fbx",
   "PackageReferences": [],
   "EditorReferences": null,
   "IsWhitelistDisabled": false,
@@ -22,7 +22,10 @@
     "PerMapRanking": false,
     "LeaderboardType": "None",
     "CsProjName": "",
-    "StartupScene": "scenes/minimal.scene",
-    "ControlModes": {}
+    "StartupScene": "scenes/level1.scene",
+    "ControlModes": {},
+    "ParentPackage": "venedetta.salvage_haunt#local",
+    "MapStartupScene": "scenes/level1.scene",
+    "LaunchMode": "Normal"
   }
 }

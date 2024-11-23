@@ -8,12 +8,6 @@
     "Enabled": true,
     "Components": [
       {
-        "__type": "SalvageHaunt.Prop",
-        "__guid": "eb6d85a1-b765-4088-90f2-8708426948d5",
-        "Kostet": 15,
-        "Name": "Small Cube"
-      },
-      {
         "__type": "Sandbox.ModelRenderer",
         "__guid": "ac284ab8-cdb7-4ba6-92de-d9be36088b1b",
         "BodyGroups": 18446744073709551615,
@@ -58,6 +52,13 @@
         "OverrideMassCenter": false,
         "RigidbodyFlags": 0,
         "StartAsleep": false
+      },
+      {
+        "__type": "SalvageHaunt.Item",
+        "__guid": "a69c98f6-a9ff-438d-8e42-4a656537f0d0",
+        "IconPath": "",
+        "Name": "Small Cube",
+        "Price": 50
       }
     ],
     "Children": [],

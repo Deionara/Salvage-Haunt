@@ -1,0 +1,72 @@
+{
+  "RootObject": {
+    "__guid": "f2be1009-3588-443b-8083-7c0ea071abf0",
+    "Flags": 0,
+    "Name": "Barrel",
+    "Position": "-194.7164,33.97524,21.35852",
+    "Tags": "prop",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "77d08e10-862b-4027-a657-2215a6635c29",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {
+          "X": false,
+          "Y": false,
+          "Z": false,
+          "Pitch": false,
+          "Yaw": false,
+          "Roll": false
+        },
+        "MassCenterOverride": "0,0,0",
+        "MassOverride": 0,
+        "MotionEnabled": true,
+        "OverrideMassCenter": false,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "SalvageHaunt.Item",
+        "__guid": "eddee746-800a-44fe-893a-9bd0f82c35ee",
+        "IconPath": "",
+        "Name": "Barrel",
+        "Price": 25
+      },
+      {
+        "__type": "Sandbox.ModelRenderer",
+        "__guid": "90af9e8c-321b-4e49-9298-968aa7f5d749",
+        "BodyGroups": 18446744073709551615,
+        "CreateAttachments": false,
+        "MaterialOverride": "models/crates_and_barrels_2.vmat",
+        "Model": "models/crates_and_barrels_fbx.vmdl",
+        "RenderOptions": {
+          "GameLayer": true,
+          "OverlayLayer": false,
+          "BloomLayer": false,
+          "AfterUILayer": false
+        },
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "ff7236d8-00cc-43ff-ba6f-b4abebd43460",
+        "Center": "0,0,16.23999",
+        "IsTrigger": false,
+        "Scale": "25.84,25.20001,30.56",
+        "Static": false,
+        "SurfaceVelocity": "0,0,0"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

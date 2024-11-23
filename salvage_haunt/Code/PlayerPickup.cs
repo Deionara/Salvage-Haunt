@@ -23,19 +23,19 @@ public sealed class PlayerPickup : Component
 
 		if ( _currentProp != null && Input.Pressed( "use" ))
 		{
-			Inventory.Instance.Add( _currentProp );
+			PlayerInventory.Instance.Add( _currentProp );
 		}
 
 		if ( trace.Hit )
 		{
 			var obj = trace.GameObject;
 
-			foreach ( var item in Inventory.Instance.inventory )
+			foreach ( var item in PlayerInventory.Instance.inventory )
 			{
 				if ( item == _currentProp )
 					_currentProp = null;
 			}
-			if ( obj.GetComponent<SalvageHaunt.Prop>() != null )
+			if ( obj.GetComponent<SalvageHaunt.Item>() != null )
 			{
 				_currentProp = obj;
 			}
@@ -52,20 +52,20 @@ public sealed class PlayerPickup : Component
 
 	public string GetPropName()
 	{
-		return _currentProp != null ? _currentProp.GetComponent<SalvageHaunt.Prop>().Name : "";
+		return _currentProp != null ? _currentProp.GetComponent<SalvageHaunt.Item>().Name : "";
 	}
 
 	public string GetKostetProp()
 	{
 		if ( _currentProp == null )
 			return "";
-		return _currentProp != null ? _currentProp.GetComponent<SalvageHaunt.Prop>().Kostet.ToString() + "$" : "";
+		return _currentProp != null ? _currentProp.GetComponent<SalvageHaunt.Item>().Price.ToString() + "$" : "";
 	}
 
 	public string GetInventoryPropsName()
 	{
 		string line = "";
-		foreach ( var prop in Inventory.Instance.inventory )
+		foreach ( var prop in PlayerInventory.Instance.inventory )
 		{
 			 line += prop.Name;
 		}

@@ -1,0 +1,32 @@
+PlayerHud {
+	position: absolute;
+	top: 50px;
+	left: 15px;
+	right: 0;
+	bottom: 0;
+	font: x-large;
+	font-size: 15px;
+
+	.vitual {
+		position: absolute;
+		font-size: 40px;
+		bottom: 30px;
+		left: 20px;
+		font-weight: bold;
+		flex-direction: column;
+	}
+
+	.selected {
+		position: absolute;
+		top: 80%;
+		left: 50%;
+		transform:translate(-50%,-20%);
+		font-size:64px;
+		font-weight: bold;
+		text-align: center;
+		color: snow;
+		text-shadow: 5px 5px 15px rgb(0, 0, 0);
+
+		flex-direction:column;
+	}
+}

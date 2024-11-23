@@ -1,0 +1,29 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@namespace Sandbox
+
+<root>
+    <div class="vitual">
+        @if (Inventory.Instance.inventory.Count > 0)
+        {
+            <p> @player.PlayerPickup.GetInventoryPropsName()</p>
+        }
+    </div>
+    <div class="selected">
+        <p> @player.PlayerPickup.GetPropName()</p>
+        <p> @player.PlayerPickup.GetKostetProp()</p>
+    </div>
+</root>
+
+@code
+{
+    [Property] public Player player;
+    /// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash()
+    {
+        return System.HashCode.Combine(player.Money, player.PlayerPickup.GetPropName(), player.PlayerPickup.GetKostetProp());
+    }
+}

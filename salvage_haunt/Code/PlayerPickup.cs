@@ -1,5 +1,6 @@
 using SalvageHaunt;
 using Sandbox;
+using System;
 
 public sealed class PlayerPickup : Component
 {
@@ -16,16 +17,23 @@ public sealed class PlayerPickup : Component
 
 	protected override void OnUpdate()
 	{
+		Tracing();
+		
+	}
+
+	private void Tracing()
+	{
 		var camPos = Camera.WorldPosition;
-		var trace = Scene.Trace.Ray( camPos, camPos + (Camera.WorldRotation.Forward * DistancePickup))
-			.WithoutTags("player")
+		var trace = Scene.Trace.Ray( camPos, camPos + (Camera.WorldRotation.Forward * DistancePickup) )
+			.WithoutTags( "player" )
 			.Run();
 
-		if ( _currentProp != null && Input.Pressed( "use" ))
+		if ( _currentProp != null && Input.Pressed( "use" ) )
 		{
 			PlayerInventory.Instance.Add( _currentProp );
 		}
 
+		//Item trace
 		if ( trace.Hit )
 		{
 			var obj = trace.GameObject;
@@ -44,7 +52,27 @@ public sealed class PlayerPickup : Component
 		}
 		else
 			_currentProp = null;
+		//Button trace
+		if(trace.Hit && trace.GameObject.GetComponent<Button>() != null)
+		{
+			//sell items
+			var button = trace.GameObject.GetComponent<Button>();
+			button.OnPressed += ( bool value ) =>
+			{
+				if ( value )
+					SellZone.Instance.Sell();
+			};
+			if ( Input.Pressed( "use" ) )
+			{
+				button.GetComponent<SoundBoxComponent>().StartSound();
+				button.Press( true );
+			}
+			else
+				button.Press( false );
+		}
+
 	}
+
 	protected override void DrawGizmos()
 	{
 		Gizmo.Draw.Line( Camera.LocalPosition, Camera.LocalPosition + Vector3.Forward * DistancePickup );

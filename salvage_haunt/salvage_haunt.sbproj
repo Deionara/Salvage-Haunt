@@ -23,7 +23,11 @@
     "LeaderboardType": "None",
     "CsProjName": "",
     "StartupScene": "scenes/level1.scene",
-    "ControlModes": {},
+    "ControlModes": {
+      "Keyboard": false,
+      "VR": false,
+      "Gamepad": false
+    },
     "ParentPackage": "venedetta.salvage_haunt#local",
     "MapStartupScene": "scenes/level1.scene",
     "LaunchMode": "Normal"

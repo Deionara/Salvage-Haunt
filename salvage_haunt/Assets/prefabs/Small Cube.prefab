@@ -56,7 +56,7 @@
       {
         "__type": "SalvageHaunt.Item",
         "__guid": "a69c98f6-a9ff-438d-8e42-4a656537f0d0",
-        "IconPath": "",
+        "IconPath": "default_icon.png",
         "Name": "Small Cube",
         "Price": 50
       }

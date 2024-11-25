@@ -15,6 +15,10 @@ public sealed class Player : Component
 	[Property]
 	public float MoveSpeed { get; set; }
 	[Property]
+	public float RunSpeed { get; set; } = 500f;
+	[Property]
+	public float DuckSpeed { get; set;}
+	[Property]
 	public float JumpStrong { get; set; }
 	[Property]
 	public GameObject Camera;
@@ -37,28 +41,51 @@ public sealed class Player : Component
 	{
 		Look(); 
 	}
+	bool isDuck = false;
+
 	private void Movement()
 	{
-		var moveVel = Input.AnalogMove * WorldRotation * MoveSpeed;
+		var currentSpeed = Input.Down( "run" ) && !isDuck ? RunSpeed : MoveSpeed;
+		var duckSpeed = Input.Down("duck") ? DuckSpeed : 0;
+
+		var moveVel = Input.AnalogMove.Normal * WorldRotation * (currentSpeed - duckSpeed);
 
 		controller.Accelerate( moveVel );
 
 		if ( controller.IsOnGround )
 		{
+			animationHelper.DuckLevel = 0;
+			isDuck = false;
 			controller.ApplyFriction( 5f );
 			controller.Acceleration = 10f;
+			animationHelper.WithVelocity( moveVel );
 
+			if(Input.Down("duck"))
+			{
+				isDuck = true;
+				animationHelper.DuckLevel = 1;
+			}
 			if ( Input.Pressed( "Jump" ) )
+			{
 				controller.Punch( Vector3.Up * JumpStrong );
+				animationHelper.TriggerJump();
+			}
 		}
 		else
+		{
+			controller.Acceleration = 3f;
 			controller.Velocity += Scene.PhysicsWorld.Gravity * Time.Delta;
-
+		}
 		controller.Move();
+		
+		animationHelper.IsGrounded = controller.IsOnGround;
 	}
 
 	[Property]
 	public Vector3 EyesPosition { get; set; }
+
+	[Property] 
+	public Vector3 DuckEyePosition { get; set; }
 	private Angles EyeAngles { get; set; }
 	private Transform _cameraPosition;
 	private void Look()
@@ -67,8 +94,13 @@ public sealed class Player : Component
 		EyeAngles = EyeAngles.WithPitch( MathX.Clamp( EyeAngles.pitch, -89, 89 ) );
 		WorldRotation = Rotation.FromYaw( EyeAngles.yaw );
 
-		if(Camera != null)
-			Camera.Transform.Local = _cameraPosition.RotateAround(EyesPosition, EyeAngles.WithYaw(0));
+		if ( Camera != null )
+		{
+				Camera.Transform.Local = _cameraPosition.RotateAround( EyesPosition, EyeAngles.WithYaw( 0 ) );
+			if(isDuck) Camera.LocalPosition -= DuckEyePosition;
+		}
+		animationHelper.WithLook( Camera.WorldRotation.Forward );
+
 	}
 	protected override void OnAwake()
 	{

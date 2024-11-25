@@ -2,8 +2,7 @@
   "RootObject": {
     "__guid": "f2be1009-3588-443b-8083-7c0ea071abf0",
     "Flags": 0,
-    "Name": "Barrel",
-    "Position": "-194.7164,33.97524,21.35852",
+    "Name": "barrel",
     "Tags": "prop",
     "Enabled": true,
     "Components": [
@@ -31,7 +30,7 @@
       {
         "__type": "SalvageHaunt.Item",
         "__guid": "eddee746-800a-44fe-893a-9bd0f82c35ee",
-        "IconPath": "",
+        "IconPath": "models/crates_and_barrels_fbx.vmdl.png",
         "Name": "Barrel",
         "Price": 25
       },
@@ -60,7 +59,32 @@
         "Static": false,
         "SurfaceVelocity": "0,0,0"
       }
-    ]
+    ],
+    "Children": [],
+    "__variables": [],
+    "__properties": {
+      "FixedUpdateFrequency": 50,
+      "MaxFixedUpdates": 5,
+      "NetworkFrequency": 30,
+      "NetworkInterpolation": true,
+      "PhysicsSubSteps": 1,
+      "ThreadedAnimation": true,
+      "TimeScale": 1,
+      "UseFixedUpdate": true,
+      "Metadata": {},
+      "NavMesh": {
+        "Enabled": false,
+        "IncludeStaticBodies": true,
+        "IncludeKeyframedBodies": true,
+        "EditorAutoUpdate": true,
+        "AgentHeight": 64,
+        "AgentRadius": 16,
+        "AgentStepSize": 18,
+        "AgentMaxSlope": 40,
+        "ExcludedBodies": "",
+        "IncludedBodies": ""
+      }
+    }
   },
   "ShowInMenu": false,
   "MenuPath": null,

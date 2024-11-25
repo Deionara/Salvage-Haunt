@@ -1,0 +1,84 @@
+{
+  "RootObject": {
+    "__guid": "97588b29-b7ff-47ba-bfa4-2b811a00800b",
+    "Flags": 0,
+    "Name": "gear",
+    "Position": "11.70383,-196.6514,29.46219",
+    "Rotation": "0.001776079,-0.7071044,-0.001776079,0.7071046",
+    "Tags": "prop",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "Sandbox.Rigidbody",
+        "__guid": "44ed9285-253b-45b3-8c06-1a0e9a95905b",
+        "AngularDamping": 0,
+        "Gravity": true,
+        "LinearDamping": 0,
+        "Locking": {
+          "X": false,
+          "Y": false,
+          "Z": false,
+          "Pitch": false,
+          "Yaw": false,
+          "Roll": false
+        },
+        "MassCenterOverride": "0,0,0",
+        "MassOverride": 2,
+        "MotionEnabled": true,
+        "OverrideMassCenter": false,
+        "RigidbodyFlags": 0,
+        "StartAsleep": false
+      },
+      {
+        "__type": "SalvageHaunt.Item",
+        "__guid": "8cfc95b3-12f4-407c-9b6c-266e7a42b5a4",
+        "IconPath": "models/gear.vmdl.png",
+        "Name": "Gear",
+        "Price": 30
+      },
+      {
+        "__type": "Sandbox.BoxCollider",
+        "__guid": "6b1b9188-4130-4348-a370-69658962c080",
+        "Center": "0,0,9.919996",
+        "IsTrigger": false,
+        "Scale": "4.640015,25.20001,25.2",
+        "Static": false,
+        "SurfaceVelocity": "0,0,0"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "a09b9a13-ad84-44bd-8f10-49dc968bf074",
+        "Flags": 0,
+        "Name": "schesternia",
+        "Position": "-0.000003814697,0.00003541261,10.00341",
+        "Rotation": "0,0.7071067,0.0000000002328306,0.7071068",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "Sandbox.ModelRenderer",
+            "__guid": "4a7e53c3-f152-4731-ba4e-2bc4842102a2",
+            "BodyGroups": 18446744073709551615,
+            "CreateAttachments": false,
+            "Model": "models/gear.vmdl",
+            "RenderOptions": {
+              "GameLayer": true,
+              "OverlayLayer": false,
+              "BloomLayer": false,
+              "AfterUILayer": false
+            },
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "DontBreakAsTemplate": false,
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}

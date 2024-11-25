@@ -34,7 +34,7 @@ public sealed class PlayerInventory : Component
 		//Debug();
 
 
-		if ( Input.Pressed( "reload" ) && _currentSlotProp != null )
+		if ( Input.Pressed( "drop" ) && _currentSlotProp != null )
 			Drop( );
 
 		if(Input.Pressed("slot1"))
@@ -57,26 +57,19 @@ public sealed class PlayerInventory : Component
 			{
 				if ( inventory[i] != null && _currentSlotProp != null )
 				{
-					inventory[i].Enabled = false;
+					inventory[i].WorldPosition = WorldPosition + WorldRotation.Backward * 100000f;
 				}
 			}
-			if(_currentSlot >= 0 && currentSlot < inventory.Count)
+			if (_currentSlot >= 0 && currentSlot < inventory.Count)
 			{
 				_currentSlotProp = inventory[currentSlot];
-				_currentSlotProp.Enabled = true;
+				_currentSlotProp.WorldRotation = WeaponParent.WorldRotation;
+				_currentSlotProp.WorldPosition = WeaponParent.WorldPosition;
 			}
 			else
 			{
 				_currentSlotProp = null;
 			}
-			//for ( int i = 0; i < inventory.Count; i++ )
-			//{
-			//	if ( inventory[_currentSlot] != null && _currentSlotProp == null && _currentSlotProp != inventory[_currentSlot] )
-			//	{
-			//		_currentSlotProp = inventory[currentSlot];
-			//		_currentSlotProp.Enabled = true;
-			//	}
-			//}
 		}
 	}
 	public void Drop()
@@ -102,7 +95,6 @@ public sealed class PlayerInventory : Component
 			gameObject.WorldPosition = WeaponParent.WorldPosition;
 			gameObject.WorldRotation = WeaponParent.WorldRotation;
 			gameObject.GetComponent<Rigidbody>().Gravity = false;
-			gameObject.Enabled = false;
 		}
 		else
 		{
@@ -110,6 +102,8 @@ public sealed class PlayerInventory : Component
 			return;
 		}
 	}
+
+	
 	private void Debug()
 	{
 		var item_list = "";

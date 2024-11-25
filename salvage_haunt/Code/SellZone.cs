@@ -6,18 +6,26 @@ public sealed class SellZone : Component, Component.ITriggerListener
 {
 	public static SellZone Instance { get; set; }
 	[Property]
+	public SoundBoxComponent acceptSound;
+	[Property]
 	public TextRenderer ItemsListText { get; set; }
 	[Property]
 	public TextRenderer CurrentQuotaText { get; set; }
+	[Property]
+	public TextRenderer MoeyText { get; set; }
 
+	[Property]
 	public List<GameObject> Props = new List<GameObject>();
+	[Property]
+	public Button sellButton { get; set; }
 	void ITriggerListener.OnTriggerEnter(Sandbox.Collider other)
 	{
 		var item = other.GameObject;
 		foreach ( var _item in Props )
 			if (item == _item)
 				return;
-		Props.Add( item );
+		if(item.GetComponent<Button>() == null)
+			Props.Add( item );
 	}
 
 	void ITriggerListener.OnTriggerExit(Sandbox.Collider other)
@@ -31,6 +39,7 @@ public sealed class SellZone : Component, Component.ITriggerListener
 	{
 		string line = "";
 		int quota = 0;
+		line = "No Items";
 		foreach ( var item in Props )
 		{ 
 			line = Props.Count > 0 ? string.Join( "\n", Props.Where( item => item != null ).Select( item => $"{item.GetComponent<Item>().Name} - {item.GetComponent<Item>().Price}$" ) ) : "Kein Props";
@@ -46,5 +55,23 @@ public sealed class SellZone : Component, Component.ITriggerListener
 	protected override void OnAwake()
 	{
 		Instance = this;
+	}
+
+	
+	public void Sell()
+	{
+		if ( Props.Count == 0 ) return;
+		acceptSound.StartSound();
+		foreach ( var item in Props )
+		{
+			Game.Instance.money += item.GetComponent<Item>().Price;
+			Game.Instance.currentQuota -= item.GetComponent<Item>().Price;
+			item.Destroy();
+		}
+		MoeyText.Text = $"{Game.Instance.money}$";
+		Props.Clear();
+
+		Sandbox.Services.Achievements.Unlock( "solditems" );
+		Log.Info( "Items sell" );
 	}
 }

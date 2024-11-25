@@ -20,6 +20,8 @@
     private string GetItemImage(GameObject item)
     {
         var itemComponent = item.GetComponent<Item>();
+        if (itemComponent == null)
+            Log.Warning($"Item has no Item component: {item.Name}");
         return itemComponent?.IconPath ?? "default_icon.png";
     }
 
@@ -27,7 +29,8 @@
     {
         return System.HashCode.Combine(
             PlayerInventory.Instance._currentSlot,
-            PlayerInventory.Instance.inventory.Count
+            PlayerInventory.Instance.inventory.Count,
+            PlayerInventory.Instance.inventory.Select(item => item?.GetComponent<Item>()?.IconPath ?? "default_icon.png")
         );
     }
 }
